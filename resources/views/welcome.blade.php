@@ -28,6 +28,11 @@
             -webkit-text-size-adjust: 100%
         }
 
+        .busca-coluna {
+            padding-left: 15px;
+
+        }
+
         .espacamento {
             margin: 0 20px;
         }
