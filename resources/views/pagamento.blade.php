@@ -1,26 +1,11 @@
-
-<!--<form id="form-pagamento" action="{{ url('charge') }}" method="post">
-    <input type="text" name="amount" id="amount" />
+<form action="{{ url('charge') }}" method="post" id="paymentForm">
+    <input type="text" name="amount" id="amount" readonly />
     {{ csrf_field() }}
-     Não é mais necessário o botão de envio
+    <input type="submit" name="submit" value="Pagar">
 </form>
 
 <script>
-    // Obtém o valor do curso da variável PHP na view
-    var cursoValor = "{{ $cursoValor }}";
-
-    // Preenche o campo de valor no formulário com o valor do curso
-    document.getElementById('amount').value = cursoValor;
-
-    // Redireciona automaticamente após 1 segundo
-    setTimeout(function() {
-        document.getElementById('form-pagamento').submit();
-    }, 1000);
-</script>-->
-
-
-<form action="{{ url('charge') }}" method="post">
-    <input type="text" name="amount" />
-    {{ csrf_field() }}
-    <input type="submit" name="submit" value="Pay Now">
-</form>
+    // Preencher o campo de valor com o valor do curso da sessão
+    var cursoSelecionado = "{{ session('cursoSelecionado') }}";
+    document.getElementById("amount").value = cursoSelecionado;
+</script>

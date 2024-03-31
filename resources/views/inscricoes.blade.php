@@ -157,27 +157,22 @@
                     <a class="btn btn-secondary w-100" href="{{ route('home') }}">Voltar</a>
                     <br>
                     <br>
-                    <a class="btn btn-secundary w-100" href="{{ route('pagamento') }}">PAGAMENTO</a>
-
-                    <!--<input type="hidden" name="curso" value="{{ $curso->nome }}">-->
                 </form>
-<!--
+
                 <script>
                     // Adicione um ouvinte de evento para o envio do formulário
                     document.getElementById('form-inscricoes').addEventListener('submit', function(event) {
-
-
-                        //window.location.href = "{{ route('pagamento') }}";
-                        // Evite o envio padrão do formulário
-                        event.preventDefault();
+                        // Verifique a validação do lado do cliente
+                        if (!this.checkValidity()) {
+                            event.preventDefault(); // Evita o envio do formulário se a validação falhar
+                        }
 
                         // Obtenha o valor selecionado do curso
                         var cursoSelecionado = document.getElementById('curso').value;
-
                         // Redirecione o usuário para a rota de pagamento com o valor do curso como parâmetro
                         window.location.href = "{{ route('pagamento') }}?curso=" + cursoSelecionado;
                     });
-                </script>-->
+                </script>
             </div>
         </div>
     </div>

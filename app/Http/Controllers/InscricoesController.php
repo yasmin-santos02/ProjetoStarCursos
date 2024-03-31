@@ -16,13 +16,45 @@ class InscricoesController extends Controller
     return view('inscricoes')->with('cursos', $cursos);
   }
 
-  public function inscricaoPagamento(Request $request){
+  public function inscricaoPagamento(Request $request)
+  {
     $cursoValor = $request->input('curso');
     return view('pagamento', ['cursoValor' => $cursoValor]);
   }
 
   public function store(Request $request)
   {
+
+    $request->validate(
+      [
+        'senha' => 'required|confirmed',
+        'nome' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'CPF' => 'required|size:11',
+        'telefone' => 'required|size:10',
+        'celular' => 'required|size:11',
+        'UF' => 'required',
+        'endereco' => 'required',
+        'empresa' => 'required'
+      ]
+    );
+
+    // Definindo as mensagens de erro personalizadas
+    $messages = [
+      'nome.required' => 'O campo nome é obrigatório.',
+      'email.required' => 'O campo email é obrigatório.',
+      'senha.required' => 'O campo senha é obrigatório',
+      'CPF.required' => 'O campo CPF é obrigatório e deve conter 11 dígitos (incluindo DDD).',
+      'telefone.required' => 'O campo telefone é obrigatório e deve conter 10 dígitos (incluindo DDD).',
+      'celular.required' => 'O campo celular é obrigatório.',
+      'UF.required' => 'O campo estado é obrigatório',
+      'endereco' => 'required',
+      'empresa' => 'required'
+    ];
+
+    // Valide os dados do formulário
+    $request->validate($messages);
+
     $inscricao = new Inscricao;
     $inscricao->nome = $request->nome;
     $inscricao->email = $request->email;
@@ -35,17 +67,17 @@ class InscricoesController extends Controller
     $inscricao->categoria = $request->categoria;
     $inscricao->curso = $request->curso;
 
-    //verificação se as senhas correspondem
-    $request->validate(
-      [
-        'senha' => 'required|confirmed'
-      ]
-    );
+    $cursoSelecionado = $request->input('curso');
+    $curso = Curso::where('valor', $cursoSelecionado)->first(); // Supondo que 'valor' seja o atributo do modelo Curso que corresponde ao valor do curso
+    $inscricao->curso = $curso->nome; // Armazenar o nome do curso em vez do valor
+
+    $cursoSelecionado = $request->input('curso');
+    $request->session()->put('cursoSelecionado', $cursoSelecionado);
 
     $inscricao->senha = bcrypt($request->senha);
 
     $inscricao->save();
 
-    return redirect()->route('home')->with('sucess', 'Inscrição realizada com sucesso!');
+    return redirect()->route('pagamento')->with('sucess', 'Inscrição realizada com sucesso!');
   }
 }

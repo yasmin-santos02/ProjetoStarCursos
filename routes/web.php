@@ -16,9 +16,9 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/inscricoes', [InscricoesController::class, 'create'])->name('inscricoes.create');
-Route::get('/listagemInscricoes', [ListarInscricoesController::class,'filtrarInscricoes'])->name('listagemInscricoes.filtrar');
+Route::get('/listagemInscricoes', [ListarInscricoesController::class, 'filtrarInscricoes'])->name('listagemInscricoes.filtrar');
 
-Route::get('/cadastroUsuario', [CadastroController::class,'cadastrar'])->name('cadastroUsuario.cadastrar');
+Route::get('/cadastroUsuario', [CadastroController::class, 'cadastrar'])->name('cadastroUsuario.cadastrar');
 Route::get('/editarInscricoes/{id}', [ListarInscricoesController::class, 'editar'])->name('editarInscricoes.editar');
 //Route::get('/editar/{id}',  'App\Http\Controllers\ListarInscricoesController@editar');
 
@@ -27,17 +27,17 @@ Route::post('/editarInscricoes/{id}', [ListarInscricoesController::class, 'atual
 
 Route::get('/editar/{id}', [ListarInscricoesController::class, 'editar'])->name('editarInscricoes.editar');
 
-Route::get('/cadastroCurso', [CadastroCursoController::class,'curso'])->name('cadastroCurso.cadastrar');
-Route::get('/listagemCursos', [ListarCursosController::class,'filtrarCursos'])->name('listagemCursos.filtrarCursos');
+Route::get('/cadastroCurso', [CadastroCursoController::class, 'curso'])->name('cadastroCurso.cadastrar');
+Route::get('/listagemCursos', [ListarCursosController::class, 'filtrarCursos'])->name('listagemCursos.filtrarCursos');
 
-Route::get('/documentoPDF', [ListarInscricoesController::class,'GerarPDF'])->name('documentoPDF.gerarPDF');
+Route::get('/documentoPDF', [ListarInscricoesController::class, 'GerarPDF'])->name('documentoPDF.gerarPDF');
 
-Route::get('/documentoCursoPDF', [ListarCursosController::class,'GerarPDF'])->name('documentoCursoPDF.gerarPDF');
+Route::get('/documentoCursoPDF', [ListarCursosController::class, 'GerarPDF'])->name('documentoCursoPDF.gerarPDF');
 
-Route::post('/cursos', [CadastroCursoController::class,'store']);
-Route::post('/inscricoes',[InscricoesController::class,'store']);
-Route::post('/cadastroUsuario', [CadastroController::class,'store']);
-Route::post('/inscricoes', [InscricoesController::class, 'store'])->name('inscricoes.store');
+Route::post('/cursos', [CadastroCursoController::class, 'store']);
+Route::post('/inscricoes', [InscricoesController::class, 'store']);
+Route::post('/cadastroUsuario', [CadastroController::class, 'store']);
+//Route::post('/inscricoes', [InscricoesController::class, 'store'])->name('inscricoes.store');
 
 Route::get('/sobre', function () {
     return view('sobre');

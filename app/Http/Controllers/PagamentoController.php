@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pagamento;
 use Exception;
+use Illuminate\Http\Response;
+use Omnipay\Common\Message\AbstractResponse;
+
 use Omnipay\Omnipay;
 
 class PagamentoController extends Controller
@@ -30,31 +33,37 @@ class PagamentoController extends Controller
         return view('pagamento');
     }
 
-    public function charge(Request $request)
-    {
-        if ($request->input('submit')) {
-            try {
-                $response = $this->gateway->purchase(array(
-                    'amount' => $request->input('amount'),
-                    'currency' => env('PAYPAL_CURRENCY'),
-                    'returnUrl' => url('paymentsuccess'),
-                    'cancelUrl' => url('paymenterror'),
-                ))->send();
+public function charge(Request $request)
+{
+    if ($request->input('submit')) {
+        try {
+            $response = $this->gateway->purchase(array(
+                'amount' => $request->input('amount'),
+                'currency' => env('PAYPAL_CURRENCY'),
+                'returnUrl' => url('paymentsuccess'),
+                'cancelUrl' => url('paymenterror'),
+            ))->send();
 
+            // Verificar se a resposta é uma instância de AbstractResponse
+            if ($response instanceof AbstractResponse) {
+                // Se a resposta for bem-sucedida, você pode redirecionar para o PayPal
                 if ($response->isRedirect()) {
-                    // Obtém a URL de redirecionamento
-                   $response -> redirect();
-                    // Redireciona o usuário para a página de pagamento do PayPal
-                    return $response;
+                    return $response->getRedirectResponse();
                 } else {
-                    // not successful
+                    // Se não for, você pode lidar com isso de acordo com sua lógica de negócios
                     return $response->getMessage();
                 }
-            } catch (Exception $e) {
-                return $e->getMessage();
+            } else {
+                // Se não for uma instância de AbstractResponse, você pode lidar com isso de acordo com sua lógica de negócios
+                return $response;
             }
+            
+        } catch (Exception $e) {
+            return $e->getMessage();
         }
     }
+}
+    
 
     public function payment_success(Request $request)
     {
