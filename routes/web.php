@@ -20,7 +20,9 @@ Route::get('/listagemInscricoes', [ListarInscricoesController::class, 'filtrarIn
 
 Route::get('/cadastroUsuario', [CadastroController::class, 'cadastrar'])->name('cadastroUsuario.cadastrar');
 Route::get('/editarInscricoes/{id}', [ListarInscricoesController::class, 'editar'])->name('editarInscricoes.editar');
-//Route::get('/editar/{id}',  'App\Http\Controllers\ListarInscricoesController@editar');
+Route::get('/apagarinscrição/{id}', [ListarInscricoesController::class, 'apagar'])->name('apagarInscricao');
+
+Route::get('/apagarCurso/{id}', [ListarCursosController::class, 'apagar'])->name('apagarCurso.apagar');
 
 Route::post('/editar/{id}', 'App\Http\Controllers\ListarInscricoesController@atualizar');
 Route::post('/editarInscricoes/{id}', [ListarInscricoesController::class, 'atualizar'])->name('editarInscricoes.atualizar');

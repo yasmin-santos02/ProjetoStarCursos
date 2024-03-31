@@ -106,7 +106,6 @@
                     </div>
                     <br />
 
-                    <!--CORRIGIR PARA CATEGORIA-->
                     <div class="form-group">
                         <label for="categoria">Categoria</label>
                         <select class="form-control" id="categoria" name="categoria">

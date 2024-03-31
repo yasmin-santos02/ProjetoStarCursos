@@ -57,7 +57,9 @@
                                         <div class="btn-group" role="group">
                                             <a role="button" class="btn btn-primary"
                                                 href="{{ route('editarInscricoes.editar', ['id' => $inscricao->id]) }}">Editar</a>
-                                            <a role="button" class="btn btn-danger">Apagar</a>
+
+                                            <a role="button" class="btn btn-danger" href="{{ route('apagarInscricao', ['id' => $inscricao->id]) }}">Apagar</a>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -66,7 +68,7 @@
                     </tbody>
                 </table>
                 <br />
-                <!--PRECISA TERMINAR E PROCURAR COMO FAZ ESTA MERDA-->
+
                 <a href="{{ route('documentoPDF.gerarPDF') }}">
                     <button type="button" class="btn btn-primary btn-sm">Exportar PDF</button>
                 </a>
@@ -79,7 +81,7 @@
         <script>
             //Criando os filtros de busca da tabela
             $(document).ready(function() {
-                $('#table-inscricoes').DataTable({
+                $('#table-inscritos').DataTable({
                     "ordering": true,
                     "paging": true,
                     "searching": true,

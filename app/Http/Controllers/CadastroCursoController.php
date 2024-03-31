@@ -27,6 +27,6 @@ class CadastroCursoController extends Controller
 
     $curso->save();
 
-    return redirect()->route('home')->with('sucess', 'Curso cadastrado com sucesso!');;
+    return redirect()->route('listagemCursos.filtrarCursos')->with('sucess', 'Curso cadastrado com sucesso!');;
   }
 }

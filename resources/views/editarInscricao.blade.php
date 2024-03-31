@@ -45,6 +45,47 @@
                     </div>
                     <br />
 
+                    <select name="UF" for="UF" id="UF">
+                        <option value="">Selecione o estado</option>
+                        <?php
+                        $estados = [
+                            'AC' => 'Acre',
+                            'AL' => 'Alagoas',
+                            'AP' => 'Amapá',
+                            'AM' => 'Amazonas',
+                            'BA' => 'Bahia',
+                            'CE' => 'Ceará',
+                            'DF' => 'Distrito Federal',
+                            'ES' => 'Espírito Santo',
+                            'GO' => 'Goiás',
+                            'MA' => 'Maranhão',
+                            'MT' => 'Mato Grosso',
+                            'MS' => 'Mato Grosso do Sul',
+                            'MG' => 'Minas Gerais',
+                            'PA' => 'Pará',
+                            'PB' => 'Paraíba',
+                            'PR' => 'Paraná',
+                            'PE' => 'Pernambuco',
+                            'PI' => 'Piauí',
+                            'RJ' => 'Rio de Janeiro',
+                            'RN' => 'Rio Grande do Norte',
+                            'RS' => 'Rio Grande do Sul',
+                            'RO' => 'Rondônia',
+                            'RR' => 'Roraima',
+                            'SC' => 'Santa Catarina',
+                            'SP' => 'São Paulo',
+                            'SE' => 'Sergipe',
+                            'TO' => 'Tocantins',
+                        ];
+                        
+                        foreach ($estados as $sigla => $estado) {
+                            echo "<option value=\"$sigla\">$estado</option>";
+                        }
+                        ?>
+                    </select>
+                    <br />
+                    <br />
+
                     <div class="form-group">
                         <label for="empresa">Empresa</label>
                         <input type="text" id="empresa" name="empresa" class="form-control"
@@ -64,7 +105,8 @@
                         <input type="text" id="celular" name="celular" class="form-control"
                             placeholder="Digite o celular para inscrição">
                     </div>
-                    <!--CORRIGIR PARA CATEGORIA-->
+                    <br />
+
                     <div class="form-group">
                         <label for="categoria">Categoria</label>
                         <select class="form-control" id="categoria" name="categoria">
@@ -74,16 +116,17 @@
                         </select>
                     </div>
                     <br />
-                    <!--CORRIGIR PARA ENUM-->
 
                     <div class="form-group">
                         <label for="curso">Curso</label>
                         <select class="form-control" id="curso" name="curso">
-                            <option value="Análise e Desenvolvimento de Sistemas">Análise e Desenvolvimento de Sistemas</option>
-                            <option value="Sistemas para internet">Sistemas para internet</option>
-                            <option value="Web Design">Web Design</option>
+                            @foreach ($cursos as $curso)
+                                <option value="{{ $curso->valor }}">{{ $curso->nome }}</option>
+                            @endforeach
+
                         </select>
                     </div>
+                    <br />
 
                     <div class="form-group">
                         <label for="senha">Senha</label>
@@ -117,4 +160,3 @@
         </div>
     </div>
 @endsection
-

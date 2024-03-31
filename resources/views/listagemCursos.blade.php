@@ -15,6 +15,7 @@
         </style>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     </head>
 
     <body>
@@ -34,7 +35,7 @@
                             <th scope="col">Término</th>
                             <th scope="col">Inscritos</th>
                             <th scope="col">Material</th>
-                            <th scope="col"></th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
 
@@ -49,14 +50,21 @@
                                     <td scope="col">{{ $curso->terminoCurso }}</td>
                                     <td scope="col">{{ $curso->maxInscritos }}</td>
                                     <td scope="col">{{ $curso->material }}</td>
-                                    <td scope="col"></td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+
+                                            <a role="button" class="btn btn-danger"
+                                                href="{{ route('apagarCurso.apagar', ['id' => $curso->id]) }}">Apagar</a>
+
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif
                     </tbody>
-
                 </table>
-                <!--PRECISA TERMINAR E PROCURAR COMO FAZ ESTA MERDA-->
+                <br/>
+                
                 <a href="{{ route('documentoCursoPDF.gerarPDF') }}">
                     <button type="button" class="btn btn-primary btn-sm">Exportar PDF</button>
                 </a>
