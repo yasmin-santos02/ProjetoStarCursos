@@ -7,6 +7,10 @@ use App\Models\Curso;
 use Illuminate\Http\Request;
 use Exception;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CursosExport;
+
 
 class ListarCursosController extends Controller
 {
@@ -20,6 +24,11 @@ class ListarCursosController extends Controller
     {
         $cursos = Curso::all();
         return view('listagemCursos', ['cursos' => $cursos]);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new CursosExport, 'cursos.xlsx');
     }
 
     public function GerarPDF()

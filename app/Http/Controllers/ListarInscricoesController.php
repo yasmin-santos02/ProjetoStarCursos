@@ -8,6 +8,8 @@ use App\Models\Curso;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\InscritosExport;
 
 class ListarInscricoesController extends Controller
 {
@@ -21,6 +23,11 @@ class ListarInscricoesController extends Controller
     {
         $inscricoes = Inscricao::all();
         return view('listagemInscricoes', ['inscricoes' => $inscricoes]);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new InscritosExport, 'inscricoes.xlsx');
     }
 
     public function GerarPDF()

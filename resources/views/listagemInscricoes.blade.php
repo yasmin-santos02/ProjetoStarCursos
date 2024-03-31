@@ -32,11 +32,11 @@
                             <option value="1">Período</option>
                         </select>
                     </div>
-                    
+
                     <div class="busca-coluna">
-                    <span>Busca: </span>
-                    <input type="text" id="busca" placeholder="Pesquisar...">
-                </div>
+                        <span>Busca: </span>
+                        <input type="text" id="busca" placeholder="Pesquisar...">
+                    </div>
                 </div>
 
                 <link rel="stylesheet" href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css" />
@@ -77,7 +77,7 @@
                             var columnIndex = $('#select-column').val(); // Obtém o índice da coluna selecionada
                             dataTable.columns().search('').draw(); // Limpa a pesquisa atual em todas as colunas
                             dataTable.column(columnIndex).search(this.value)
-                        .draw(); // Aplica a pesquisa à coluna selecionada
+                                .draw(); // Aplica a pesquisa à coluna selecionada
                         });
 
                         // Atualiza a pesquisa ao alterar a coluna selecionada
@@ -85,7 +85,7 @@
                             var columnIndex = $(this).val(); // Obtém o índice da coluna selecionada
                             dataTable.columns().search('').draw(); // Limpa a pesquisa atual em todas as colunas
                             dataTable.column(columnIndex).search($('#busca').val())
-                        .draw(); // Aplica a pesquisa à coluna selecionada
+                                .draw(); // Aplica a pesquisa à coluna selecionada
                         });
                     });
                 </script>
@@ -136,7 +136,9 @@
                 <a href="{{ route('documentoPDF.gerarPDF') }}">
                     <button type="button" class="btn btn-primary btn-sm">Exportar PDF</button>
                 </a>
-                <button type="button" class="btn btn-primary btn-sm">Exportar XLS</button>
+                <a href="{{ route('excelInscricao') }}">
+                    <button type="button" class="btn btn-primary btn-sm">Exportar XLS</button>
+                </a>
                 <br />
                 <a class="btn btn-secondary w-50" href="{{ route('home') }}">Voltar</a>
             </div>

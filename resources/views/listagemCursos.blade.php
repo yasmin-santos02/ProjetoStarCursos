@@ -68,7 +68,9 @@
                 <a href="{{ route('documentoCursoPDF.gerarPDF') }}">
                     <button type="button" class="btn btn-primary btn-sm">Exportar PDF</button>
                 </a>
+                <a href="{{ route('excel') }}">
                 <button type="button" class="btn btn-primary btn-sm">Exportar XLS</button>
+                </a>
                 <br />
                 <a class="btn btn-secondary w-50" href="{{ route('home') }}">Voltar</a>
             </div>
