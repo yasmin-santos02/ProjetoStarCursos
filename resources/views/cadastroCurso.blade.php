@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row justify-center">
             <div class="col-md-6">
-                <form action="/cursos" method="post">
+                <form action="/cursos" method="post" onsubmit="return verificarData()">
                     @csrf
                     <div class="form-group">
                         <label for="nome">Nome do curso</label>
@@ -49,6 +49,23 @@
                         <input type="date" id="terminoCurso" name="terminoCurso" class="form-control"
                             placeholder="Digite a data de término das inscrições">
                     </div>
+
+                    <script>
+    // Função para verificar se a segunda data é maior que a primeira
+    function verificarData() {
+        // Obter os valores das datas
+        var inicioCurso = new Date(document.getElementById("inicioCurso").value);
+        var terminoCurso = new Date(document.getElementById("terminoCurso").value);
+
+        // Verificar se a segunda data é maior que a primeira
+        if (terminoCurso <= inicioCurso) {
+            // Se a segunda data for menor ou igual à primeira, exibir uma mensagem de erro
+            alert("A data de término das inscrições deve ser posterior à data de início das inscrições.");
+            return false; // Retorna falso para impedir o envio do formulário
+        }
+        return true; // Retorna verdadeiro se a segunda data for maior que a primeira
+    }
+</script>
                     <br />
 
                     <div class="form-group">
@@ -64,6 +81,16 @@
                             placeholder="Digite a quantidade máxima de inscritos">
                     </div>
                     <br />
+
+                     @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
                     <button type="submit" class="btn btn-primary w-100" value="Cadastrar Curso">Salvar</button>
                     <a class="btn btn-secondary w-100" href="{{ route('home') }}">Voltar</a>

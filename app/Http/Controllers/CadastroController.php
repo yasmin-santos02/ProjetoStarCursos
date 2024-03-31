@@ -16,16 +16,18 @@ class CadastroController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'nome' => 'required',
+                'senha' => 'required|confirmed',
+                'email' => 'required|email',
+            ]
+        );
+
         $usuarios = new Usuario;
         $usuarios->nome = $request->nome;
         $usuarios->email = $request->email;
         $usuarios->categoria = $request->categoria;
-
-        $request->validate(
-            [
-                'senha' => 'required|confirmed'
-            ]
-        );
 
         $usuarios->senha = bcrypt($request->senha);
 

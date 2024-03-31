@@ -3,7 +3,8 @@
 @section('content')
 
     <head>
-        <title>Inscrição</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     </head>
 
     <body>
@@ -122,7 +123,6 @@
                             @foreach ($cursos as $curso)
                                 <option value="{{ $curso->valor }}">{{ $curso->nome }}</option>
                             @endforeach
-
                         </select>
                     </div>
                     <br />
@@ -175,4 +175,25 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#CPF').mask('000.000.000-00', {
+                reverse: false
+            });
+        });
+
+        $(document).ready(function() {
+            $('#telefone').mask('(00)0000-0000', {
+                reverse: false
+            });
+        });
+
+        $(document).ready(function() {
+            $('#celular').mask('(00)00000-0000', {
+                reverse: false
+            });
+        });
+    </script>
+
 @endsection

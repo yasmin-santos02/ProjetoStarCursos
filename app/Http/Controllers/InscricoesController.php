@@ -39,22 +39,6 @@ class InscricoesController extends Controller
       ]
     );
 
-    // Definindo as mensagens de erro personalizadas
-    $messages = [
-      'nome.required' => 'O campo nome é obrigatório.',
-      'email.required' => 'O campo email é obrigatório.',
-      'senha.required' => 'O campo senha é obrigatório',
-      'CPF.required' => 'O campo CPF é obrigatório e deve conter 11 dígitos (incluindo DDD).',
-      'telefone.required' => 'O campo telefone é obrigatório e deve conter 10 dígitos (incluindo DDD).',
-      'celular.required' => 'O campo celular é obrigatório.',
-      'UF.required' => 'O campo estado é obrigatório',
-      'endereco' => 'required',
-      'empresa' => 'required'
-    ];
-
-    // Valide os dados do formulário
-    $request->validate($messages);
-
     $inscricao = new Inscricao;
     $inscricao->nome = $request->nome;
     $inscricao->email = $request->email;
@@ -68,8 +52,8 @@ class InscricoesController extends Controller
     $inscricao->curso = $request->curso;
 
     $cursoSelecionado = $request->input('curso');
-    $curso = Curso::where('valor', $cursoSelecionado)->first(); // Supondo que 'valor' seja o atributo do modelo Curso que corresponde ao valor do curso
-    $inscricao->curso = $curso->nome; // Armazenar o nome do curso em vez do valor
+    $curso = Curso::where('valor', $cursoSelecionado)->first(); 
+    $inscricao->curso = $curso->nome;
 
     $cursoSelecionado = $request->input('curso');
     $request->session()->put('cursoSelecionado', $cursoSelecionado);

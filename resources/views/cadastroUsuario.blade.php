@@ -12,7 +12,7 @@
             <h1 class="display-10">Cadastro de Usuário<h1>
         </div>
     </body>
-    
+
     <div class="container">
         <div class="row justify-center">
             <div class="col-md-6">
@@ -43,8 +43,6 @@
                     </div>
                     <br />
 
-                    <!--CORRIGIR PARA ENUM-->
-
                     <div class="form-group">
                         <label for="senha">Senha</label>
                         <input type="password" id="senha" name="senha" class="form-control"
@@ -59,6 +57,16 @@
                     </div>
                     <br />
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <button type="submit" class="btn btn-primary w-100" value="Cadastrar Usuario">Salvar</button>
                     <a class="btn btn-secondary w-100" href="{{ route('home') }}">Voltar</a>
 
@@ -67,4 +75,3 @@
         </div>
     </div>
 @endsection
-

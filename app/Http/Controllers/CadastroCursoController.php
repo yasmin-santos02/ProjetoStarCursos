@@ -16,6 +16,19 @@ class CadastroCursoController extends Controller
 
   public function store(Request $request)
   {
+
+    $request->validate(
+      [
+        'nome' => 'required|confirmed',
+        'descricao' => 'required',
+        'valor' => 'required',
+        'inicioCurso' => 'required',
+        'terminoCurso' => 'required',
+        'maxInscritos' => 'required',
+        'material' => 'required'
+      ]
+    );
+
     $curso = new Curso;
     $curso->nome = $request->nome;
     $curso->descricao = $request->descricao;

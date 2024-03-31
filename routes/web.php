@@ -39,7 +39,6 @@ Route::get('/documentoCursoPDF', [ListarCursosController::class, 'GerarPDF'])->n
 Route::post('/cursos', [CadastroCursoController::class, 'store']);
 Route::post('/inscricoes', [InscricoesController::class, 'store']);
 Route::post('/cadastroUsuario', [CadastroController::class, 'store']);
-//Route::post('/inscricoes', [InscricoesController::class, 'store'])->name('inscricoes.store');
 
 Route::get('/sobre', function () {
     return view('sobre');
