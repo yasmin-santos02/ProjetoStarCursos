@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\Curso;
 use App\Models\Inscricao;
 use Maatwebsite\Excel\Concerns\FromCollection;
 

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('categoria');
             $table->string('curso');
             $table->string('senha');
+            $table->string('status');
             $table->timestamps();
         });
     }

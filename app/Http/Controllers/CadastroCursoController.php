@@ -19,7 +19,7 @@ class CadastroCursoController extends Controller
 
     $request->validate(
       [
-        'nome' => 'required|confirmed',
+        'nome' => 'required',
         'descricao' => 'required',
         'valor' => 'required',
         'inicioCurso' => 'required',

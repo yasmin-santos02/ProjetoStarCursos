@@ -115,7 +115,7 @@
                                     <td scope="col">{{ $inscricao->CPF }}</td>
                                     <td scope="col">{{ $inscricao->email }}</td>
                                     <td scope="col">{{ $inscricao->UF }}</td>
-                                    <td scope="col">{{ $inscricao->status }}</td>
+                                    <td scope="col">{{ $inscricao->Status }}</td>
                                     <td scope="col">{{ $inscricao->valor }}</td>
                                     <td>
                                         <div class="btn-group" role="group">

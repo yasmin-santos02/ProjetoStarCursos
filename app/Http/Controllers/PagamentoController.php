@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use IlluminateHttpRequest;
 use AppPayment;
 use App\Http\Controllers\Controller;
+use App\Models\Inscricao;
 use Illuminate\Http\Request;
 use App\Models\Pagamento;
 use Exception;
@@ -20,7 +21,7 @@ class PagamentoController extends Controller
     public function __construct()
     {
         $this->gateway = Omnipay::create('PayPal_Rest');
-        
+
         $this->gateway->initialize([
             'clientId' => env('PAYPAL_CLIENT_ID'),
             'secret' => env('PAYPAL_CLIENT_SECRET'),
@@ -33,74 +34,68 @@ class PagamentoController extends Controller
         return view('pagamento');
     }
 
-public function charge(Request $request)
-{
-    if ($request->input('submit')) {
-        try {
-            $response = $this->gateway->purchase(array(
-                'amount' => $request->input('amount'),
-                'currency' => env('PAYPAL_CURRENCY'),
-                'returnUrl' => url('paymentsuccess'),
-                'cancelUrl' => url('paymenterror'),
-            ))->send();
+    public function charge(Request $request)
+    {
+        if ($request->input('submit')) {
+            try {
+                $response = $this->gateway->purchase(array(
+                    'amount' => $request->input('amount'),
+                    'currency' => env('PAYPAL_CURRENCY'),
+                    'returnUrl' => url('paymentsuccess'),
+                    'cancelUrl' => url('paymenterror'),
+                ))->send();
 
-            // Verificar se a resposta é uma instância de AbstractResponse
-            if ($response instanceof AbstractResponse) {
-                // Se a resposta for bem-sucedida, você pode redirecionar para o PayPal
-                if ($response->isRedirect()) {
-                    return $response->getRedirectResponse();
+                // Verificar se a resposta é uma instância de AbstractResponse
+                if ($response instanceof AbstractResponse) {
+                    if ($response->isRedirect()) {
+                        return $response->getRedirectResponse();
+                    } else {
+                        return $response->getMessage();
+                    }
                 } else {
-                    // Se não for, você pode lidar com isso de acordo com sua lógica de negócios
-                    return $response->getMessage();
+                    return $response;
                 }
-            } else {
-                // Se não for uma instância de AbstractResponse, você pode lidar com isso de acordo com sua lógica de negócios
-                return $response;
+            } catch (Exception $e) {
+                return $e->getMessage();
             }
-            
-        } catch (Exception $e) {
-            return $e->getMessage();
         }
     }
-}
-    
+
 
     public function payment_success(Request $request)
-    {
-        // Once the transaction has been approved, we need to complete it.
-        if ($request->input('paymentId') && $request->input('PayerID')) {
-            $transaction = $this->gateway->completePurchase(array(
-                'payer_id'             => $request->input('PayerID'),
-                'transactionReference' => $request->input('paymentId'),
-            ));
-            $response = $transaction->send();
+{
+    if ($request->input('paymentId') && $request->input('PayerID')) {
+        $transaction = $this->gateway->completePurchase(array(
+            'payer_id'             => $request->input('PayerID'),
+            'transactionReference' => $request->input('paymentId'),
+        ));
+        $response = $transaction->send();
 
-            if ($response->isSuccessful()) {
-                // The customer has successfully paid.
-                $arr_body = $response->getData();
+        if ($response->isSuccessful()) {
+            
+            $arr_body = $response->getData();
 
-                // Insert transaction data into the database
-                $isPaymentExist = Pagamento::where('payment_id', $arr_body['id'])->first();
+            $isPaymentExist = Pagamento::where('payment_id', $arr_body['id'])->first();
 
-                if (!$isPaymentExist) {
-                    $payment = new Pagamento;
-                    $payment->payment_id = $arr_body['id'];
-                    $payment->payer_id = $arr_body['payer']['payer_info']['payer_id'];
-                    $payment->payer_email = $arr_body['payer']['payer_info']['email'];
-                    $payment->amount = $arr_body['transactions'][0]['amount']['total'];
-                    $payment->currency = env('PAYPAL_CURRENCY');
-                    $payment->payment_status = $arr_body['state'];
-                    $payment->save();
-                }
+            if (!$isPaymentExist) {
+                $payment = new Pagamento;
+                $payment->payment_id = $arr_body['id'];
+                $payment->payer_id = $arr_body['payer']['payer_info']['payer_id'];
+                $payment->payer_email = $arr_body['payer']['payer_info']['email'];
+                $payment->amount = $arr_body['transactions'][0]['amount']['total'];
+                $payment->currency = env('PAYPAL_CURRENCY');
+                $payment->payment_status = $arr_body['state'];
+                $payment->save();
+                  }
 
-                return "Payment is successful. Your transaction id is: " . $arr_body['id'];
-            } else {
-                return $response->getMessage();
-            }
+            return redirect()->route('listagemInscricoes.filtrar')->with('sucess', 'Pago com sucesso.');
         } else {
-            return 'Transaction is declined';
+            return $response->getMessage();
         }
+    } else {
+        return 'Transação foi recusada';
     }
+}
 
     public function payment_error()
     {

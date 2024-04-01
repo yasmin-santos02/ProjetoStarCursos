@@ -9,7 +9,7 @@
 
     <body>
         <div class="text-center">
-            <h1 class="display-10">Cadastro/Edição de curso<h1>
+            <h1 class="display-10">Cadastro de curso<h1>
         </div>
     </body>
     <div class="container">
@@ -51,21 +51,21 @@
                     </div>
 
                     <script>
-    // Função para verificar se a segunda data é maior que a primeira
-    function verificarData() {
-        // Obter os valores das datas
-        var inicioCurso = new Date(document.getElementById("inicioCurso").value);
-        var terminoCurso = new Date(document.getElementById("terminoCurso").value);
+                        // Função para verificar se a segunda data é maior que a primeira
+                        function verificarData() {
+                            // Obter os valores das datas
+                            var inicioCurso = new Date(document.getElementById("inicioCurso").value);
+                            var terminoCurso = new Date(document.getElementById("terminoCurso").value);
 
-        // Verificar se a segunda data é maior que a primeira
-        if (terminoCurso <= inicioCurso) {
-            // Se a segunda data for menor ou igual à primeira, exibir uma mensagem de erro
-            alert("A data de término das inscrições deve ser posterior à data de início das inscrições.");
-            return false; // Retorna falso para impedir o envio do formulário
-        }
-        return true; // Retorna verdadeiro se a segunda data for maior que a primeira
-    }
-</script>
+                            // Verificar se a segunda data é maior que a primeira
+                            if (terminoCurso <= inicioCurso) {
+                                // Se a segunda data for menor ou igual à primeira, exibir uma mensagem de erro
+                                alert("A data de término das inscrições deve ser posterior à data de início das inscrições.");
+                                return false; // Retorna falso para impedir o envio do formulário
+                            }
+                            return true; // Retorna verdadeiro se a segunda data for maior que a primeira
+                        }
+                    </script>
                     <br />
 
                     <div class="form-group">
@@ -82,7 +82,7 @@
                     </div>
                     <br />
 
-                     @if ($errors->any())
+                    @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)

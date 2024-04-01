@@ -161,14 +161,13 @@
                 <script>
                     // Adicione um ouvinte de evento para o envio do formulário
                     document.getElementById('form-inscricoes').addEventListener('submit', function(event) {
-                        // Verifique a validação do lado do cliente
+
                         if (!this.checkValidity()) {
-                            event.preventDefault(); // Evita o envio do formulário se a validação falhar
+                            event.preventDefault();
                         }
 
-                        // Obtenha o valor selecionado do curso
                         var cursoSelecionado = document.getElementById('curso').value;
-                        // Redirecione o usuário para a rota de pagamento com o valor do curso como parâmetro
+
                         window.location.href = "{{ route('pagamento') }}?curso=" + cursoSelecionado;
                     });
                 </script>

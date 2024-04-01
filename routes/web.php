@@ -53,6 +53,6 @@ Route::post('charge', [PagamentoController::class, 'charge']);
 Route::get('paymentsuccess', [PagamentoController::class, 'payment_success']);
 Route::get('paymenterror', [PagamentoController::class, 'payment_error']);
 Route::get('/inscricaoPagamento', [InscricoesController::class,  'inscricaoPagamento'])->name('pagamento');
-
-Route::get('users/export/', [ListarCursosController::class, 'export'])->name('excel');  
-Route::get('users/export/', [ListarInscricoesController::class, 'export'])->name('excelInscricao');  
+  
+Route::get('inscricoes/export/', [ListarInscricoesController::class, 'export'])->name('excelInscricao');
+Route::get('cursos/export/', [ListarCursosController::class, 'export'])->name('excelCurso');  

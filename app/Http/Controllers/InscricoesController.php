@@ -30,9 +30,9 @@ class InscricoesController extends Controller
         'senha' => 'required|confirmed',
         'nome' => 'required|string|max:255',
         'email' => 'required|email|max:255',
-        'CPF' => 'required|size:11',
-        'telefone' => 'required|size:10',
-        'celular' => 'required|size:11',
+        'CPF' => 'required|size:14',
+        'telefone' => 'required|size:13',
+        'celular' => 'required|size:14',
         'UF' => 'required',
         'endereco' => 'required',
         'empresa' => 'required'
@@ -62,6 +62,6 @@ class InscricoesController extends Controller
 
     $inscricao->save();
 
-    return redirect()->route('pagamento')->with('sucess', 'Inscrição realizada com sucesso!');
+    return redirect()->route('pagamento');
   }
 }
