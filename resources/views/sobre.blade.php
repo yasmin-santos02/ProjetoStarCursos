@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<title>MarcaSite - Sobre</title>
+<title>Star Cursos - Sobre</title>
 
 @extends('welcome')
 @section('content')
@@ -16,13 +16,11 @@
             <div class="content-box">
                 <p>
 
-                    O projeto "MarcaSite - Cursos" é uma aplicação web desenvolvida como parte de um teste de vaga de
-                    estágio para
-                    Yasmin Santos. O objetivo principal da aplicação é criar um sistema de inscrições para cursos oferecidos
+                    O projeto "Star Cursos" é uma aplicação web desenvolvida com o objetivo principal de um sistema de inscrições para cursos oferecidos
                     pela
-                    empresa MarcaSite. O sistema deve permitir que os alunos se inscrevam nos cursos desejados, com
+                    empresa fictícia Star Cursos. O sistema deve permitir que os alunos se inscrevam nos cursos desejados, com
                     diferenciação de
-                    valores por curso, integração com um gateway de pagamento (como Pagseguro, PayPal, Stripe, Pagarme) para
+                    valores por curso, integração com um gateway de pagamento PayPal para
                     processamento de transações financeiras e controle de vendas com dados fictícios via sandbox.
                 </p>
                 <p>
@@ -68,7 +66,7 @@
                 <p>
                     Considerações Finais:
                     <br>
-                    O projeto "MarcaSite - Cursos" foi desenvolvido com o objetivo de demonstrar as habilidades técnicas e
+                    O projeto "Star Cursos" foi desenvolvido com o objetivo de demonstrar as habilidades técnicas e
                     de
                     desenvolvimento de Yasmin Santos. Utilizando as melhores práticas e recursos oferecidos pelo Laravel, a
                     aplicação busca oferecer uma solução eficiente e escalável para o gerenciamento de inscrições em cursos

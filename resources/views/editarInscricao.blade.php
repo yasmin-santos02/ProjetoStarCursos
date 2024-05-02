@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-@extends('welcome')
+@extends('layout')
 @section('content')
 
     <head>
